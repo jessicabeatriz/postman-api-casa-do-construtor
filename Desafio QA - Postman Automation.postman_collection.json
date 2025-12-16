@@ -97,14 +97,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/v1/areas/67977301f3cf795ae77f4b95",
+					"raw": "{{baseUrl}}/v1/areas/{{itemId}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"v1",
 						"areas",
-						"67977301f3cf795ae77f4b95"
+						"{{itemId}}"
 					]
 				}
 			},
