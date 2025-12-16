@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "f3398591-cd99-45ee-a101-07b5d36bdd27",
+		"name": "Desafio QA - Postman Automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30298882"
+	},
+	"item": [
+		{
+			"name": "Areas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code HTTP é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta menor que 2s\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Resposta é um JSON válido\", function () {\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Corpo da resposta não está vazio\", function () {\r",
+							"    pm.expect(response).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"const firstAreaId = response.data[0].idArea;\r",
+							"\r",
+							"pm.collectionVariables.set(\"itemId\", firstAreaId);\r",
+							"\r",
+							"console.log(\"ID da área capturado:\", firstAreaId);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/areas",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"areas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Area by Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code HTTP é 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Tempo de resposta menor que 2s\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Resposta contém dados da área\", function () {\r",
+							"    pm.expect(response.data).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"idArea retornado é o mesmo da consulta\", function () {\r",
+							"    pm.expect(response.data.idArea)\r",
+							"        .to.eql(pm.collectionVariables.get(\"itemId\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/v1/areas/67977301f3cf795ae77f4b95",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"areas",
+						"67977301f3cf795ae77f4b95"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "itemId",
+			"value": ""
+		}
+	]
+}
